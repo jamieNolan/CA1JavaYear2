@@ -1,0 +1,113 @@
+   
+   @(employee: List[models.Employee],department: List[models.Department],project: List[models.Project], user: models.users.User, env: play.api.Environment)
+    @main("Employee", user) {  
+
+    <p class="lead">Employee List</p>
+    <div class="row">
+    <div class="col-sm-2">
+      <h4>Categories</h4>
+      <div class="list-group">
+
+        <a href="@routes.HomeController.about(0)" class="list-group-item">All categories</a>
+        @for(d <- department) {
+          <a href="@routes.HomeController.about(d.getId)" class="list-group-item">@d.getName
+              <span class="badge">@d.getEmployee.size()</span>
+          </a>
+        }
+
+
+    
+    </div>
+  </div>
+  </div>
+        <div class="col-sm-10">
+
+       
+    @if(flash.containsKey("success")){
+
+    <div class="alert alert-success">
+      @flash.get("success")
+    </div>
+  }
+    <table class="table table-bordered table-hover table-condensed">
+    
+    <thead>
+    
+    <!-- The header row-->
+    
+    <tr>
+
+    <th>Image</th>  
+
+    <th>ID</th>
+    
+    <th>Department</th>
+    
+    <th>Address</th>
+
+    <th>Name</th>
+    
+    <th>Project</th>
+
+    
+    <th>Delete</th>
+
+    <th>Update</th>
+    
+    
+    </tr>
+    
+    </thead>
+    
+    <tbody>
+    
+    @for(e<-employee) {
+    <tr>
+        @if(env.resource("public/images/Images/" + e.getId + ".jpg").isDefined) {
+         <td><img src="/assets/images/Images/@(e.getId + ".jpg")"/></td>
+      } else {
+          <td><img src="/assets/images/Images/noImage.jpg"/></td>
+      }
+
+    
+    <td>@e.getId</td>
+
+    <td>@e.getDepartment</td>
+    
+    <td>@e.getAddress</td>
+    
+    <td>@e.getName</td>
+
+    <td>@e.getProject</td>
+
+
+    <td>
+      <a href="@routes.HomeController.deleteEmployee(e.getId)" class="button-xs btn-danger">
+        <button class="btn btn-primary">Delete an Employee</button>
+      </a>
+    
+    </td>
+    <td>     
+       <a href="@routes.HomeController.updateEmployee(e.getId)" class="button-xs btn-danger">
+      <button class="btn btn-primary">Update an Employee</button>
+      </a>
+</td>
+    
+    </tr>
+  </tbody>
+  
+  }
+    
+    
+    </table>
+    <p>
+      <a href="@routes.HomeController.addEmployee()">
+        <button class="btn btn-primary">Add an Employee</button>
+      </a>
+    </p>
+  
+    
+  </div>
+    
+    }
+  

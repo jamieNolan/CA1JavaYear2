@@ -1,0 +1,48 @@
+@(address: List[models.Address], user: models.users.User, env: play.api.Environment)
+@main("Address", user){  
+<p class="lead">Address List</p>
+
+@if(flash.containsKey("success")){
+
+<div class="alert alert-success">
+  @flash.get("success")
+</div>
+}
+<table class="table table-bordered table-hover table-condensed">
+
+<thead>
+
+<!-- The header row-->
+
+<tr>
+
+<th>ID</th>
+
+<th>Address</th>
+
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<!-- Product row(s) -->
+@for(a<-address) {
+<tr>
+
+<td>@a.getId</td>
+
+<td>@a.getAddress</td>
+
+
+
+</tr>
+}
+
+</tbody>
+
+</table>
+
+
+}

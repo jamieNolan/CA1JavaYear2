@@ -1,0 +1,47 @@
+@(project: List[models.Project], user: models.users.User, env: play.api.Environment)
+@main("Project", user){  
+<p class="lead">Project List</p>
+
+@if(flash.containsKey("success")){
+
+<div class="alert alert-success">
+  @flash.get("success")
+</div>
+}
+<table class="table table-bordered table-hover table-condensed">
+
+<thead>
+
+<!-- The header row-->
+
+<tr>
+
+<th>ID</th>
+
+<th>Project</th>
+
+
+</tr>
+
+</thead>
+
+<tbody>
+
+@for(p<-project) {
+<tr>
+
+<td>@p.getId</td>
+
+<td>@p.getProjectName</td>
+
+
+
+</tr>
+}
+
+</tbody>
+
+</table>
+
+
+}
